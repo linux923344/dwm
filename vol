@@ -1,0 +1,6 @@
+print_volume() {
+[ "$(pulsemixer --get-mute)" = "1" ] && printf "MUTE" && exit
+vol=$(pulsemixer --get-volume | awk '{print $1}')
+printf "%s%%\\n" "$vol"
+}
+print_volume
