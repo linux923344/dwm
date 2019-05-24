@@ -8,8 +8,7 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     	/* 0 means no systray */
-/*static const char *fonts[]          = {"monospace:size=14", "noto color emoji"};*/
-static const char *fonts[]          = { "monospace:size=14", "Font Awesome 5 Free Solid:size=14" };
+static const char *fonts[]          = { "monospace:size=15", "Font Awesome 5 Free Solid:size=15"};
 static const char dmenufont[]       = "monospace:size=14";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -117,7 +116,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  		tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, 		tagmon,         {.i = +1 } },
 	/* { MODKEY|ShiftMask,             XK_q,      		spawn,          {.v = dwmkill } }, */
-	{ MODKEY,			XK_k, 			spawn, 		{.v = qalculategtk }},
+	{ MODKEY,			XK_k, 			spawn, 		SHCMD ("qalculate-gtk")},
 	{ MODKEY,             		XK_r,                   spawn,          {.v = ranger }},
 	{ MODKEY,             		XK_m,                   spawn,          {.v = cmusshell }},
 	{ MODKEY,             		XK_F4,                  spawn,          {.v = dmenumount }},

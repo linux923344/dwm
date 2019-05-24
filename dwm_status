@@ -24,48 +24,25 @@ printf "%s%%\\n" " $vol"
 
 print_wifi() 
 {	
-	  ESSID="`iw dev wlan0 link | grep SSID| sed -r 's/SSID://' | sed -e 's/^[ \t]*//'`"
-	  if test -z "$ESSID"
-	  then
-		echo -e ""
-	  else
-		echo -e " $ESSID"
-	fi
-}
+#	  ESSID="`iw dev wlan0 link | grep SSID| sed -r 's/SSID://' | sed -e 's/^[ \t]*//'`"
+#	  if test -z "$ESSID"
+#	  then
+#		echo -e ""
+#	  else
+#		echo -e " $ESSID"
+#	fi
 
-print_mem(){
-	memfree=$(($(grep -m1 'MemAvailable:' /proc/meminfo | awk '{print $2}') / 1024))
-	echo -e "$memfree"
+[ "$(cat /sys/class/net/w*/operstate)" = 'down' ] && wifiicon="📡"
+
+[ ! -n "${wifiicon+var}" ] && wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')
+
+printf "%s %s" "$wifiicon" "$(cat /sys/class/net/e*/operstate | sed "s/down//;s/up//")"
+
 }
 
 print_temp(){
 	echo -e " $(sensors | awk '/Core 0/ {print $3}') +$(nvidia-smi -q -d temperature | grep -i "GPU Current" |sed -r 's/GPU Current Temp            ://'| sed -r 's/ C//' |sed -e 's/^[ \t]*//').0°C"
 }
-
-print_bat(){
-	hash acpi || return 0
-	onl="$(grep "on-line" <(acpi -V))"
-	charge="$(awk '{ sum += $1 } END { print sum }' /sys/class/power_supply/BAT*/capacity)"
-	if test -z "$onl"
-	then
-		# suspend when we close the lid
-		#systemctl --user stop inhibit-lid-sleep-on-battery.service
-		if [ "$charge" -ge 75 ]; then
-			echo -e " ${charge}%"
-		elif [ "$charge" -ge 50 ]; then
-			echo -e " ${charge}%"
-		elif [ "$charge" -ge 25 ]; then
-			echo -e " ${charge}%"
-		else
-			echo -e " !${charge}%"
-		fi
-	else
-		# On mains! no need to suspend
-		#systemctl --user start inhibit-lid-sleep-on-battery.service
-		echo -e " ${charge}%"
-	fi
-}
-
 
 print_date(){
 	echo -e " $(date +"%m-%e %H:%M")"
@@ -78,6 +55,48 @@ print_mail(){
 	else
         	echo "$(du -a ~/.mailbox/*/inbox/new/* 2>/dev/null | sed -n '$=')$(cat /tmp/imapsyncicon_$USER 2>/dev/null)"
 	fi
+}
+
+batLevel() {
+	# Find the battery level
+	hash acpi || return 0
+	onl="$(acpi -V | grep "on-line")"
+	charge="$(cat /sys/class/power_supply/BAT*/capacity)"
+
+	# Determine battery glyph by percentage range
+	if [[ -z $onl && ${charge} -gt 80 ]]; then
+		echo -e " ${charge}%"
+	elif [[ -z $onl && ${charge} -le 80 && ${charge} -gt 60 ]]; then
+		echo -e " ${charge}%"
+	elif [[ -z $onl && ${charge} -le 60 && ${charge} -gt 40 ]]; then
+		echo -e " ${charge}%"
+	elif [[ -z $onl && ${charge} -le 40 && ${charge} -gt 20 ]]; then
+		echo -e " ${charge}%"
+	elif [[ -z $onl && ${charge} -le 20 ]]; then
+		echo -e " ${charge}%"
+	# If charging, use animated glyph
+	else
+		echo -e ""
+	fi
+}
+
+usageData() {
+	# Calculate CPU percentage
+	read cpu a b c pi rest < /proc/stat
+	pt=$((a+b+c+pi))
+	sleep 0.1
+	read cpu a b c i rest < /proc/stat
+	t=$((a+b+c+i))
+	cpuUse=$((100*( (t-pt) - (i-pi) ) / (t-pt) ))
+
+	# Find RAM use
+	# As "A/B"
+	ramUseA=$(free -m -h | grep Mem | awk '{print $3"/"$2}')
+	# As percentage
+	ramPer=$(free -m | grep Mem | awk '{print 100*($3/$2)}')
+	ramUseB="${ramPer%.*}"
+
+	echo -e " $cpuUse%  $ramUseB%"
 }
 
 echo AUTOSTART
@@ -108,14 +127,14 @@ do
 	vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 	vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-	xsetroot -name "$(print_temp)  $(sh /home/yorune/dwm/weather.sh) $(print_wifi) $(print_bat) $(print_volume) $(print_date)"
+	xsetroot -name "$(print_temp) | $(usageData) |  $(sh /home/yorune/dwm/weather.sh) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
 
 	# Update old values to perform new calculations
 	old_received_bytes=$received_bytes
 	old_transmitted_bytes=$transmitted_bytes
 	old_time=$now
 
-	sleep 1
+	sleep 2
 
 done
 
