@@ -17,15 +17,20 @@ now=$3
 }
 
 print_volume() {
-[ "$(pulsemixer --get-mute)" = "1" ] && printf "MUTE" && exit
+[ "$(pulsemixer --get-mute)" = "1" ] && printf "" && exit
 vol=$(pulsemixer --get-volume | awk '{print $1}')
-printf "%s%%\\n" "$vol"
+printf "%s%%\\n" " $vol"
 }
 
 print_wifi() 
 {	
-      ESSID="`iw dev wlan0 link | grep SSID| sed -r 's/SSID://' | sed -e 's/^[ \t]*//'`"
-      echo -e "$ESSID"
+	  ESSID="`iw dev wlan0 link | grep SSID| sed -r 's/SSID://' | sed -e 's/^[ \t]*//'`"
+	  if test -z "$ESSID"
+	  then
+		echo -e ""
+	  else
+		echo -e " $ESSID"
+	fi
 }
 
 print_mem(){
@@ -34,7 +39,7 @@ print_mem(){
 }
 
 print_temp(){
-	echo -e "$(sensors | awk '/Core 0/ {print $3}') +$(nvidia-smi -q -d temperature | grep -i "GPU Current" |sed -r 's/GPU Current Temp            ://'| sed -r 's/ C//' |sed -e 's/^[ \t]*//').0°C"
+	echo -e " $(sensors | awk '/Core 0/ {print $3}') +$(nvidia-smi -q -d temperature | grep -i "GPU Current" |sed -r 's/GPU Current Temp            ://'| sed -r 's/ C//' |sed -e 's/^[ \t]*//').0°C"
 }
 
 print_bat(){
@@ -45,17 +50,25 @@ print_bat(){
 	then
 		# suspend when we close the lid
 		#systemctl --user stop inhibit-lid-sleep-on-battery.service
-		echo -e "B:${charge}%"
+		if [ "$charge" -ge 75 ]; then
+			echo -e " ${charge}%"
+		elif [ "$charge" -ge 50 ]; then
+			echo -e " ${charge}%"
+		elif [ "$charge" -ge 25 ]; then
+			echo -e " ${charge}%"
+		else
+			echo -e " !${charge}%"
+		fi
 	else
 		# On mains! no need to suspend
 		#systemctl --user start inhibit-lid-sleep-on-battery.service
-		echo -e "B:${charge}%"
+		echo -e " ${charge}%"
 	fi
 }
 
 
 print_date(){
-	echo -e "$(date +"%m-%e %H:%M")"
+	echo -e " $(date +"%m-%e %H:%M")"
 }
 
 print_mail(){
@@ -78,7 +91,6 @@ nm-applet --sm-disable&
 /usr/local/bin/st -e "tmux-my"&
 "/mnt/mega/Systems/Gentoo/apps/KeePass.AppImage"&
 megasync&
-opera-developer&
 dunst -config&
 /usr/bin/ibus-daemon -d&
 sh /home/yorune/.xsessionrc&
@@ -96,7 +108,7 @@ do
 	vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 	vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-	xsetroot -name "M:$(print_mail) $(print_temp) $(sh /home/yorune/dwm/weather.sh) $(print_wifi) $(print_bat) V:$(print_volume) $(print_date)"
+	xsetroot -name "$(print_temp)  $(sh /home/yorune/dwm/weather.sh) $(print_wifi) $(print_bat) $(print_volume) $(print_date)"
 
 	# Update old values to perform new calculations
 	old_received_bytes=$received_bytes
