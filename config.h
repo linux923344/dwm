@@ -88,7 +88,7 @@ static Key keys[] = {
 	{0, 				0x1008ff13, 		spawn,		SHCMD ("ponymix increase 5")},
 	{ MODKEY,			XK_F2,	   		spawn, 		SHCMD ("ponymix decrease 5")},
         { MODKEY,			XK_F1,	   		spawn,		SHCMD ("ponymix toggle")},
-	{ MODKEY,			XK_F1,	   		spawn,		SHCMD ("ponymix increase 5")},
+	{ MODKEY,			XK_F3,	   		spawn,		SHCMD ("ponymix increase 5")},
 	{ MODKEY, 			XK_F10,			spawn,		{.v = screenswitcher} },
 	{0,                             XK_Print,  		spawn,          {.v = print_screen_cmd } },
 	{ MODKEY,			XK_l,	   		spawn,	   	{.v = cmdlock } },		
