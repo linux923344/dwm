@@ -1,20 +1,27 @@
 #!/bin/bash
-function get_bytes {
-interface=$(ip route get 8.8.8.8 2>/dev/null| awk '{print $5}')
-line=$(grep $interface /proc/net/dev | cut -d ':' -f 2 | awk '{print "received_bytes="$1, "transmitted_bytes="$9}')
-eval $line
-now=$(date +%s%N)
+#function get_bytes {
+#interface=$(ip route get 8.8.8.8 2>/dev/null| awk '{print $5}')
+#line=$(grep $interface /proc/net/dev | cut -d ':' -f 2 | awk '{print "received_bytes="$1, "transmitted_bytes="$9}')
+#eval $line
+#now=$(date +%s%N)
+#}
+#
+## Function which calculates the speed using actual and old byte number.
+## Speed is shown in KByte per second when greater or equal than 1 KByte per second.
+## This function should be called each second.
+#
+#function get_velocity {
+#value=$1
+#old_value=$2
+#now=$3
+#}
+
+testweather() { 
+[ "$(stat -c %y "/tmp/weatherreport" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] && ping -q -c 1 1.1.1.1 >/dev/null && curl -s "wttr.in/$location" > "/tmp/weatherreport" && notify-send "🌞 Weather" "New weather forecast for today."
+
+printf "%s" "$(sed '16q;d' "/tmp/weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g" | tr -d '\n')" && sed '13q;d' "/tmp/weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ❄️",$1 "°","🌞",$2 "°"}'
 }
 
-# Function which calculates the speed using actual and old byte number.
-# Speed is shown in KByte per second when greater or equal than 1 KByte per second.
-# This function should be called each second.
-
-function get_velocity {
-value=$1
-old_value=$2
-now=$3
-}
 
 print_volume() {
 [ "$(pulsemixer --get-mute)" = "1" ] && printf "" && exit
@@ -116,6 +123,7 @@ sh /home/yorune/.xsessionrc&
 keepassxc& 
 transmission-daemon&
 teamviewer&
+getforecast&
 
 while true
 do
@@ -127,7 +135,7 @@ do
 	vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 	vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-	xsetroot -name "$(print_temp) | $(usageData) |  $(sh /home/yorune/dwm/weather.sh) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	xsetroot -name " $(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
 
 	# Update old values to perform new calculations
 	old_received_bytes=$received_bytes
