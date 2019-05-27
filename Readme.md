@@ -16,7 +16,7 @@
 ```
 
 # Screenshot:
-![alt text](https://github.com/linux923344/dwm/raw/master/Screen.png) 
+![alt text](https://github.com/linux923344/dwm/raw/master/Screenshot.png) 
 
 # Starting:
 All my started apps and bar is in the file ```dwm_status``` 
@@ -38,4 +38,4 @@ lrwxrwxrwx 1 yorune yorune 47 May 18 18:34 autostart.sh -> /home/yorune/MEGA/Sys
 * dwm-systray-20180314-3bd8466.diff
 
 # Wallpaper 
-![alt text](https://github.com/linux923344/dwm/raw/master/Wall.jpg) 
+![alt text](https://github.com/linux923344/dwm/raw/master/Wallpaper.jpg) 
