@@ -16,7 +16,7 @@
 ```
 
 # Screenshot:
-![alt text](https://github.com/linux923344/dwm/raw/master/Screenshot.png) 
+![alt text](https://github.com/linux923344/dwm/raw/master/Screen.png) 
 
 # Starting:
 All my started apps and bar is in the file ```dwm_status``` 
