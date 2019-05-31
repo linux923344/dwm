@@ -1,0 +1,6 @@
+mkdir -p ~/.config/ranger/
+cp rangerrc.conf ~/.config/ranger/rc.conf
+cp rifle.conf ~/.config/ranger/rifle.conf
+cp tmux.conf ~/.tmux.conf
+cp Xinitrc ~/.xinitrc
+cp scope.sh ~/.config/ranger/scope.sh 
