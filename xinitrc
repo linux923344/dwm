@@ -42,30 +42,3 @@ fi
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 exec ck-launch-session dbus-launch dwm
-
-# Start programs
-feh --bg-fill $HOME/.wall.jpg &
-xset s off -dpms&
-xset b off&
-xset s off&
-xset -dpms&
-redshift -l 52.2327:18.3036 -t 6500:3200&
-nm-applet --sm-disable&
-/usr/local/bin/st -e "tmux-my"&
-firefox-bin&
-"/mnt/mega/Systems/Gentoo/apps/KeePass.AppImage"&
-megasync&
-dunst -config&
-/usr/bin/ibus-daemon -d&
-sh /home/yorune/.xsessionrc&
-keepassxc&
-transmission-daemon&
-teamviewer&
-getforecast&
-
-# Start bar
-
-dwmbar&
-
-#exec i3
-#exec ck-launch-session dbus-launch --sh-syntax --exit-with-session i3

@@ -2,7 +2,8 @@
 testweather() { 
 [ "$(stat -c %y "/tmp/weatherreport" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] && ping -q -c 1 1.1.1.1 >/dev/null && curl -s "wttr.in/$location" > "/tmp/weatherreport" && notify-send "🌞 Weather" "New weather forecast for today."
 
-printf "%s" "$(sed '16q;d' "/tmp/weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g" | tr -d '\n')" && sed '13q;d' "/tmp/weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ❄️",$1 "°","🌞",$2 "°"}'
+#printf "%s" "$(sed '16q;d' "/tmp/weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g" | tr -d '\n')" && 
+sed '13q;d' "/tmp/weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print "❄️",$1 "°","🌞",$2 "°"}'
 }
 
 
@@ -115,21 +116,28 @@ xset b off&
 xset s off&
 xset -dpms&
 redshift -l 52.2327:18.3036 -t 6500:3200&
+compton&
 nm-applet --sm-disable&
-/usr/local/bin/st -e "tmux-my"&
+/usr/local/bin/st -e "/bin/zsh"&
+#opera&
+firefox-bin&
+thunderbird-bin&
 "/mnt/mega/Systems/Gentoo/apps/KeePass.AppImage"&
+#"/mnt/mega/Systems/Gentoo/apps/todoist/todoist"&
 megasync&
 dunst -config&
 /usr/bin/ibus-daemon -d&
 sh /home/yorune/.xsessionrc&
-keepassxc& 
 transmission-daemon&
-teamviewer&
+#teamviewer&
+#discord&
 getforecast&
+#kodi& 
 
 while true
 do
-	xsetroot -name "$(playerCmus) $(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	#xsetroot -name "$(playerCmus) | $(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	xsetroot -name "$(print_temp) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
 	sleep 2
 
 done
