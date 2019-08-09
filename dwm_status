@@ -116,29 +116,22 @@ xset b off&
 xset s off&
 xset -dpms&
 redshift -l 52.2327:18.3036 -t 6500:3200&
-compton&
+#compton&
 nm-applet --sm-disable&
-/usr/local/bin/st -e "/bin/zsh"&
-#opera&
+/usr/local/bin/st -e "tmux"&
 firefox-bin&
 thunderbird-bin&
 "/mnt/mega/Systems/Gentoo/apps/KeePass.AppImage"&
-#"/mnt/mega/Systems/Gentoo/apps/todoist/todoist"&
 megasync&
 dunst -config&
 /usr/bin/ibus-daemon -d&
 sh /home/yorune/.xsessionrc&
 transmission-daemon&
-#teamviewer&
-#discord&
 getforecast&
-#kodi& 
 
 while true
 do
-	#xsetroot -name "$(playerCmus) | $(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
-	xsetroot -name "$(print_temp) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	xsetroot -name "$(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
 	sleep 2
 
 done
-

@@ -1,6 +1,13 @@
+!/bin/bash
 mkdir -p ~/.config/ranger/
 cp rangerrc.conf ~/.config/ranger/rc.conf
 cp rifle.conf ~/.config/ranger/rifle.conf
 cp tmux.conf ~/.tmux.conf
 cp Xinitrc ~/.xinitrc
-cp scope.sh ~/.config/ranger/scope.sh 
+cp scope.sh ~/.config/ranger/scope.sh
+#ln -s /home/yorune/MEGA/Systems/Gentoo/configs/config.fish ~/.config.fish
+#ln -s /home/yorune/MEGA/Systems/Gentoo/configs/config.fish /home/yorune/.config/fish/config.fish 
+#curl -L https://get.oh-my.fish | fish
+#curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+#fish
+#fisher add jethrokuan/fzf
