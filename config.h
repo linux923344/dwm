@@ -1,6 +1,6 @@
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 10;        /* gaps between windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -27,13 +27,13 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	{ "Opera",	         	 NULL,       NULL,        1 << 1,     False,       0 },
+	{ "Mozilla Firefox",		 NULL,       NULL,	  1 << 1,     False,       0 },
 	{ "Firefox",			 NULL,       NULL,	  1 << 1,     False,       0 },
 	{ "Thunderbird",                 NULL,       NULL,        1 << 2,     False,       0 },
 	{ "Steam",         		 NULL,       NULL,        1 << 3,     False,       0 },
 	{ "Lutris",         		 NULL,       NULL,        1 << 3,     False,       0 },	
 	{ "League of Legends",         	 NULL,       NULL,        1 << 3,     True,        0 },	
 	{ "TeamSpeak 3",         	 NULL,       NULL,        1 << 3,     False,       0 },	
-	{ "discord",                 	 NULL,       NULL,        1 << 4,     False,       0 },
 	{ "keepassxc",                   NULL,       NULL,        1 << 7,     False,       0 },
 	{ "Kodi",         		 NULL,       NULL,        1 << 7,     False,       0 },	
 	{ "TeamViewer",         	 NULL,       NULL,        1 << 8,     False,       0 },	
@@ -66,7 +66,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *termcmd[]  = { "st","-ce", "/bin/zsh" , NULL };
+static const char *termcmd[]  = { "st","-ce", "/bin/fish" , NULL };
 static const char *print_screen_cmd[] = { "scrot", "%Y-%m-%d-%H%M%S.png", "-e", "mv $f ~/Screenshots", NULL };
 static const char *cmdlock[]  = { "slock", NULL };
 static const char *dwmkill[]  = { "dwm-kill", NULL };
@@ -79,7 +79,6 @@ static const char *cmusnext[]  = { "cmus-remote", "-n", NULL };
 static const char *cmusprev[]  = { "cmus-remote", "-r", NULL };
 static const char *shutdownpress[] = {"shut-sup-rest", "NULL" };
 static const char *pavucontrol[] = {"pavucontrol", "NULL" };
-static const char *qalculategtk[] = { "qalculate-gtk", "NULL" };
 static const char *screenswitcher[] = { "screen-switcher", "NULL" }; 
 
 static Key keys[] = {

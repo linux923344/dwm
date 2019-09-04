@@ -1,10 +1,11 @@
-!/bin/bash
+#!/bin/bash
 mkdir -p ~/.config/ranger/
+mkdir -p ~/.config/fish
 cp rangerrc.conf ~/.config/ranger/rc.conf
 cp rifle.conf ~/.config/ranger/rifle.conf
 cp tmux.conf ~/.tmux.conf
 cp Xinitrc ~/.xinitrc
-cp scope.sh ~/.config/ranger/scope.sh
+#cp scope.sh ~/.config/ranger/scope.sh
 #ln -s /home/yorune/MEGA/Systems/Gentoo/configs/config.fish ~/.config.fish
 #ln -s /home/yorune/MEGA/Systems/Gentoo/configs/config.fish /home/yorune/.config/fish/config.fish 
 #curl -L https://get.oh-my.fish | fish

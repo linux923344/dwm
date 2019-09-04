@@ -1,4 +1,25 @@
 #!/bin/bash
+feh --bg-fill $HOME/.wall.jpg &
+xset s off -dpms&
+xset b off&
+xset s off&
+xset -dpms&
+redshift -l 52.2327:18.3036 -t 6500:3200&
+#compton&
+nm-applet --sm-disable&
+#/usr/local/bin/st -e "/bin/fish"&
+/usr/local/bin/st -e /bin/sh -c "tmux new-session -s BASE -n HOME '/bin/zsh'\; new-window -n GOTOP 'gotop'\; new-window -n MUSIC 'cmus'\; new-window -n SERVER 'ssh root@jaqu3.ddns.net -p 2222'"&
+firefox&
+thunderbird&
+"/mnt/mega/Systems/Linux/apps/KeePass.AppImage"&
+megasync&
+dunst -config&
+#/usr/bin/ibus-daemon -d&
+#sh /home/yorune/.xsessionrc&
+transmission-daemon&
+pl&
+#getforecast&
+
 testweather() { 
 [ "$(stat -c %y "/tmp/weatherreport" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] && ping -q -c 1 1.1.1.1 >/dev/null && curl -s "wttr.in/$location" > "/tmp/weatherreport" && notify-send "🌞 Weather" "New weather forecast for today."
 
@@ -15,14 +36,6 @@ printf "%s%%\\n" " $vol"
 
 print_wifi() 
 {	
-#	  ESSID="`iw dev wlan0 link | grep SSID| sed -r 's/SSID://' | sed -e 's/^[ \t]*//'`"
-#	  if test -z "$ESSID"
-#	  then
-#		echo -e ""
-#	  else
-#		echo -e " $ESSID"
-#	fi
-
 [ "$(cat /sys/class/net/w*/operstate)" = 'down' ] && wifiicon="📡"
 
 [ ! -n "${wifiicon+var}" ] && wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')
@@ -36,9 +49,9 @@ print_temp(){
 }
 
 print_date(){
-	echo -e " $(date +"%m-%d %H:%M")"
+	echo -e " $(date +"%a %H:%M")"
+	#echo -e " $(date +"%m-%d %H:%M")"
 }
-
 print_mail(){
 	RESULT=$(echo "$(du -a ~/.mailbox/*/inbox/new/* 2>/dev/null | sed -n '$=')$(cat /tmp/imapsyncicon_$USER 2>/dev/null)")
 	if [ -z $RESULT ]; then
@@ -109,29 +122,9 @@ case "$cmus" in
 esac
 }
 
-echo AUTOSTART
-feh --bg-fill $HOME/.wall.jpg &
-xset s off -dpms&
-xset b off&
-xset s off&
-xset -dpms&
-redshift -l 52.2327:18.3036 -t 6500:3200&
-#compton&
-nm-applet --sm-disable&
-/usr/local/bin/st -e "tmux"&
-firefox-bin&
-thunderbird-bin&
-"/mnt/mega/Systems/Gentoo/apps/KeePass.AppImage"&
-megasync&
-dunst -config&
-/usr/bin/ibus-daemon -d&
-sh /home/yorune/.xsessionrc&
-transmission-daemon&
-getforecast&
-
 while true
 do
 	xsetroot -name "$(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	#xsetroot -name "$(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
 	sleep 2
-
 done
