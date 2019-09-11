@@ -36,6 +36,7 @@ lrwxrwxrwx 1 yorune yorune 47 May 18 18:34 autostart.sh -> /home/yorune/MEGA/Sys
 * dwmgit.diff
 * dwm-pango-6.0.diff
 * dwm-systray-20180314-3bd8466.diff
+* dwm-fullscreen-6.2.diff
 
 # Wallpaper 
 ![alt text](https://github.com/linux923344/dwm/raw/master/Wallpaper.jpg) 
