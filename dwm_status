@@ -8,7 +8,7 @@ redshift -l 52.2327:18.3036 -t 6500:3200&
 #compton&
 nm-applet --sm-disable&
 #/usr/local/bin/st -e "/bin/fish"&
-/usr/local/bin/st -e /bin/sh -c "tmux new-session -s BASE -n HOME '/bin/zsh'\; new-window -n GOTOP 'gotop'\; new-window -n MUSIC 'cmus'\; new-window -n SERVER 'ssh root@jaqu3.ddns.net -p 2222'"&
+/usr/local/bin/st -e /bin/sh -c "tmux new-session -s BASE -n HOME '/bin/zsh'\; new-window -n HTOP 'htop'\; new-window -n MUSIC 'cmus'"&
 firefox&
 thunderbird&
 "/mnt/mega/Systems/Linux/apps/KeePass.AppImage"&
@@ -18,13 +18,13 @@ dunst -config&
 #sh /home/yorune/.xsessionrc&
 transmission-daemon&
 pl&
-#getforecast&
+getforecast&
 
 testweather() { 
-[ "$(stat -c %y "/tmp/weatherreport" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] && ping -q -c 1 1.1.1.1 >/dev/null && curl -s "wttr.in/$location" > "/tmp/weatherreport" && notify-send "🌞 Weather" "New weather forecast for today."
+[ "$(stat -c %y "/home/yorune/.weatherreport" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] && ping -q -c 1 1.1.1.1 >/dev/null && curl -s "wttr.in/$location" > "/home/yorune/.weatherreport" && notify-send "🌞 Weather" "New weather forecast for today."
 
-#printf "%s" "$(sed '16q;d' "/tmp/weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g" | tr -d '\n')" && 
-sed '13q;d' "/tmp/weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print "❄️",$1 "°","🌞",$2 "°"}'
+printf "%s " "$(sed '16q;d' "/home/yorune/.weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g" | tr -d '\n')" &&  sed '13q;d' "/home/yorune/.weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print "❄️",$1 "°","",$2 "°"}'
+
 }
 
 
@@ -49,7 +49,7 @@ print_temp(){
 }
 
 print_date(){
-	echo -e " $(date +"%a %H:%M")"
+	echo -e " $(date +"%d/%m %H:%M")"
 	#echo -e " $(date +"%m-%d %H:%M")"
 }
 print_mail(){
@@ -124,7 +124,7 @@ esac
 
 while true
 do
-	xsetroot -name "$(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
-	#xsetroot -name "$(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
-	sleep 2
+	#xsetroot -name "$(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	xsetroot -name "$(testweather) |$(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	sleep 2 
 done

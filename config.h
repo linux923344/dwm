@@ -1,6 +1,6 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 0;        /* gaps between windows */
+static const unsigned int gappx     = 10;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -66,7 +66,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *termcmd[]  = { "st","-ce", "/bin/fish" , NULL };
+static const char *termcmd[]  = { "st","-ce", "/bin/zsh" , NULL };
 static const char *print_screen_cmd[] = { "scrot", "%Y-%m-%d-%H%M%S.png", "-e", "mv $f ~/Screenshots", NULL };
 static const char *cmdlock[]  = { "slock", NULL };
 static const char *dwmkill[]  = { "dwm-kill", NULL };
@@ -110,7 +110,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      		killclient,     {0} },
 	/*{ MODKEY,                       XK_t,     		setlayout,      {.v = &layouts[0]} },*/
 	/*{ MODKEY|ShiftMask,             XK_f,      		setlayout,      {.v = &layouts[1]} },*/
-	{ MODKEY,                       XK_f,      		setlayout,      {.v = &layouts[2]} },
+	/*{ MODKEY,                       XK_f,      		setlayout,      {.v = &layouts[2]} },*/
+	{ MODKEY,             		XK_f,      fullscreen,     {0} },
 	/*{ MODKEY,                       XK_space,  		setlayout,      {0} },*/
 	{ MODKEY,                       XK_space,  		setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_space,  		togglefloating, {0} },
