@@ -23,7 +23,7 @@ All my started apps and bar is in the file ```dwm_status```
 Only I added link to the ```~/.dwm``` like that:
 
 ```bash
-┌─[yorune@Gentoo] - [~/.dwm] - [Sat May 25, 16:03]
+┌─[yorune@Arch-I320] - [~/.dwm] - [Sat Sep 21, 23:19]
 └─[$]> ls -l
 lrwxrwxrwx 1 yorune yorune 47 May 18 18:34 autostart.sh -> /home/yorune/MEGA/Systems/Gentoo/dwm/dwm_status
 

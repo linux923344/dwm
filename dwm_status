@@ -7,7 +7,6 @@ xset -dpms&
 redshift -l 52.2327:18.3036 -t 6500:3200&
 #compton&
 nm-applet --sm-disable&
-#/usr/local/bin/st -e "/bin/fish"&
 /usr/local/bin/st -e /bin/sh -c "tmux new-session -s BASE -n HOME '/bin/zsh'\; new-window -n HTOP 'htop'\; new-window -n MUSIC 'cmus'"&
 firefox&
 thunderbird&
@@ -15,10 +14,9 @@ thunderbird&
 megasync&
 dunst -config&
 #/usr/bin/ibus-daemon -d&
-#sh /home/yorune/.xsessionrc&
 transmission-daemon&
 pl&
-getforecast&
+#getforecast&
 
 testweather() { 
 [ "$(stat -c %y "/home/yorune/.weatherreport" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] && ping -q -c 1 1.1.1.1 >/dev/null && curl -s "wttr.in/$location" > "/home/yorune/.weatherreport" && notify-send "🌞 Weather" "New weather forecast for today."
@@ -45,12 +43,11 @@ printf "%s %s" "$wifiicon" "$(cat /sys/class/net/e*/operstate | sed "s/down//
 }
 
 print_temp(){
-	echo -e " $(sensors | awk '/Core 0/ {print $3}') +$(nvidia-smi -q -d temperature | grep -i "GPU Current" |sed -r 's/GPU Current Temp            ://'| sed -r 's/ C//' |sed -e 's/^[ \t]*//').0°C"
+	echo -e " $(sensors | awk '/Core 0/ {print $3}') +$(sudo nvidia-smi -q -d temperature | grep -i "GPU Current" |sed -r 's/GPU Current Temp            ://'| sed -r 's/ C//' |sed -e 's/^[ \t]*//').0°C"
 }
 
 print_date(){
 	echo -e " $(date +"%d/%m %H:%M")"
-	#echo -e " $(date +"%m-%d %H:%M")"
 }
 print_mail(){
 	RESULT=$(echo "$(du -a ~/.mailbox/*/inbox/new/* 2>/dev/null | sed -n '$=')$(cat /tmp/imapsyncicon_$USER 2>/dev/null)")
@@ -125,6 +122,7 @@ esac
 while true
 do
 	#xsetroot -name "$(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
-	xsetroot -name "$(testweather) |$(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	#xsetroot -name " $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	xsetroot -name "$(print_temp) | $(usageData) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
 	sleep 2 
 done

@@ -1,6 +1,6 @@
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 10;        /* gaps between windows */
+static const unsigned int borderpx  = 4;        /* border pixel of windows */
+static const unsigned int gappx     = 25;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -8,8 +8,8 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     	/* 0 means no systray */
-static const char *fonts[]          = { "monospace:size=16", "Font Awesome 5 Free Solid:size=16"};
-static const char dmenufont[]       = "monospace:size=16";
+static const char *fonts[]          = { "mono:size=16", "Font Awesome 5 Free Solid:size=16"};
+static const char dmenufont[]       = "mono:size=16";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -35,8 +35,6 @@ static const Rule rules[] = {
 	{ "League of Legends",         	 NULL,       NULL,        1 << 3,     True,        0 },	
 	{ "TeamSpeak 3",         	 NULL,       NULL,        1 << 3,     False,       0 },	
 	{ "keepassxc",                   NULL,       NULL,        1 << 7,     False,       0 },
-	{ "Kodi",         		 NULL,       NULL,        1 << 7,     False,       0 },	
-	{ "TeamViewer",         	 NULL,       NULL,        1 << 8,     False,       0 },	
 	{ "obs",         		 NULL,       NULL,        1 << 8,     False,       0 },
 };
 
@@ -83,8 +81,8 @@ static const char *screenswitcher[] = { "screen-switcher", "NULL" };
 
 static Key keys[] = {
 	/* modifier                     key        		function        argument */
-	{0,				0x1008ff02,		spawn,	 	SHCMD ("light -A 10")},
-	{0, 				0x1008ff03, 		spawn,	        SHCMD ("light -U 10")},
+	{0,				0x1008ff02,		spawn,	 	SHCMD ("sudo light -A 10")},
+	{0, 				0x1008ff03, 		spawn,	        SHCMD ("sudo light -U 10")},
 	{0, 				0x1008ff11, 		spawn, 		SHCMD ("ponymix decrease 5")},
         {0,				0x1008ff12, 		spawn,		SHCMD ("ponymix toggle")},
 	{0, 				0x1008ff13, 		spawn,		SHCMD ("ponymix increase 5")},
