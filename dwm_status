@@ -18,6 +18,25 @@ transmission-daemon&
 pl&
 #getforecast&
 
+
+print_torrent(){
+	transmission-remote -l | grep % |
+	sed " # This first sed command is to ensure a desirable order with sort
+	s/.*Stopped.*/A/g;
+	s/.*Seeding.*/Z/g;
+	s/.*100%.*/N/g;
+	s/.*Idle.*/B/g;
+	s/.*Uploading.*/L/g;
+	s/.*%.*/M/g" |
+		sort -h | uniq -c | sed " # Now we replace the standin letters with icons.
+				s/A//g;
+				s/B//g;
+				s/L//g;
+				s/M//g;
+				s/N//g;
+				s/Z//g" | awk '{print $2, $1}' | sed -e "s/ $//g"
+}
+
 testweather() { 
 [ "$(stat -c %y "/home/yorune/.weatherreport" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] && ping -q -c 1 1.1.1.1 >/dev/null && curl -s "wttr.in/$location" > "/home/yorune/.weatherreport" && notify-send "🌞 Weather" "New weather forecast for today."
 
@@ -121,8 +140,6 @@ esac
 
 while true
 do
-	#xsetroot -name "$(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
-	#xsetroot -name " $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
-	xsetroot -name "$(print_temp) | $(usageData) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	xsetroot -name "$(print_torrent) | $(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
 	sleep 2 
 done
