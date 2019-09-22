@@ -1,6 +1,6 @@
 /* appearance */
 static const unsigned int borderpx  = 4;        /* border pixel of windows */
-static const unsigned int gappx     = 30;        /* gaps between windows */
+static const unsigned int gappx     = 20;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -27,8 +27,7 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	{ "Opera",	         	 NULL,       NULL,        1 << 1,     False,       0 },
-	{ "Mozilla Firefox",		 NULL,       NULL,	  1 << 1,     False,       0 },
-	{ "Firefox",			 NULL,       NULL,	  1 << 1,     False,       0 },
+	{ "firefox",  			 NULL,       NULL,        1 << 1,     False,       0 },
 	{ "Thunderbird",                 NULL,       NULL,        1 << 2,     False,       0 },
 	{ "Steam",         		 NULL,       NULL,        1 << 3,     False,       0 },
 	{ "Lutris",         		 NULL,       NULL,        1 << 3,     False,       0 },	

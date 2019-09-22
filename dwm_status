@@ -16,7 +16,7 @@ dunst -config&
 #/usr/bin/ibus-daemon -d&
 transmission-daemon&
 pl&
-(sleep 30 && getforecast)&
+#(sleep 30 && getforecast)&
 
 
 print_torrent(){
