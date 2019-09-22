@@ -16,7 +16,7 @@ dunst -config&
 #/usr/bin/ibus-daemon -d&
 transmission-daemon&
 pl&
-#getforecast&
+(sleep 30 && getforecast)&
 
 
 print_torrent(){
@@ -101,7 +101,6 @@ batLevel() {
 }
 
 usageData() {
-	# Calculate CPU percentage
 	read cpu a b c pi rest < /proc/stat
 	pt=$((a+b+c+pi))
 	sleep 0.1
@@ -109,10 +108,7 @@ usageData() {
 	t=$((a+b+c+i))
 	cpuUse=$((100*( (t-pt) - (i-pi) ) / (t-pt) ))
 
-	# Find RAM use
-	# As "A/B"
 	ramUseA=$(free -m -h | grep Mem | awk '{print $3"/"$2}')
-	# As percentage
 	ramPer=$(free -m | grep Mem | awk '{print 100*($3/$2)}')
 	ramUseB="${ramPer%.*}"
 
@@ -140,6 +136,7 @@ esac
 
 while true
 do
-	xsetroot -name "$(print_torrent) | $(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	#xsetroot -name "$(print_torrent)$(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	xsetroot -name "$(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
 	sleep 2 
 done
