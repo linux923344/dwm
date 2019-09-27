@@ -137,6 +137,6 @@ esac
 while true
 do
 	#xsetroot -name "$(print_torrent)$(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
-	xsetroot -name "$(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+	xsetroot -name "$(print_temp) | $(usageData) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
 	sleep 2 
 done
