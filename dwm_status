@@ -5,7 +5,6 @@ xset b off&
 xset s off&
 xset -dpms&
 redshift -l 52.2327:18.3036 -t 6500:3200&
-#compton&
 nm-applet --sm-disable&
 /usr/local/bin/st -e /bin/sh -c "tmux new-session -s BASE -n HOME '/bin/zsh'\; new-window -n HTOP 'htop'\; new-window -n MUSIC 'cmus'"&
 firefox&
@@ -13,10 +12,10 @@ thunderbird&
 "/mnt/mega/Systems/Linux/apps/KeePass.AppImage"&
 megasync&
 dunst -config&
-#/usr/bin/ibus-daemon -d&
+/usr/bin/ibus-daemon -d&
 transmission-daemon&
-pl&
-#(sleep 30 && getforecast)&
+#pl&
+(sleep 30 && getforecast)&
 
 
 print_torrent(){
@@ -115,7 +114,6 @@ usageData() {
 	echo -e " $cpuUse%  $ramUseB%"
 }
 
-
 playerCmus(){
 cmus=$(cmus-remote -Q | grep status)
 case "$cmus" in
@@ -123,10 +121,24 @@ case "$cmus" in
     echo ""
     ;;
 "status paused"*)
-    echo "|  |"
+    echo ""
     ;;
 'status playing'*)
-    echo "|  |"
+    INFO_CMUS=$(cmus-remote -Q 2>/dev/null)
+        if [[ $? -eq 0 ]]; then
+          INFO_TITLE=$(echo "${INFO_CMUS}" | sed -n -e 's/^.*title//p' | head -n 1)
+          INFO_ALBUM=$(echo "${INFO_CMUS}" | sed -n -e 's/^.*album//p' | head -n 1)
+          INFO_ARTIST=$(echo "${INFO_CMUS}" | sed -n -e 's/^.*artist//p' | head -n 1)
+        else
+          exit
+        fi
+        if [[ "${INFO_ARTIST}" ]] && [[ "${INFO_TITLE}" ]]; then
+          OUT_TEXT="${INFO_ARTIST} -${INFO_TITLE}"
+        elif [[ "${INFO_TITLE}" ]]; then
+          OUT_TEXT="${INFO_TITLE}"
+        fi
+    echo -e ""
+    #echo -e "${OUT_TEXT}"
     ;;
 "")
     echo ""
@@ -134,9 +146,10 @@ case "$cmus" in
 esac
 }
 
+
 while true
 do
 	#xsetroot -name "$(print_torrent)$(print_temp) | $(usageData) | $(testweather) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
-	xsetroot -name "$(print_temp) | $(usageData) | $(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
+    xsetroot -name "$(print_wifi) | $(batLevel) | $(print_volume) | $(print_date)"
 	sleep 2 
 done
