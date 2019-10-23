@@ -1,5 +1,5 @@
-static const unsigned int borderpx  = 4;        /* border pixel of windows */
-static const unsigned int gappx     = 20;        /* gaps between windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -20,8 +20,7 @@ static const char *colors[][3]      = {
 };
 
 
-/*static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };*/
-static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	{ "Opera",	         	 NULL,       NULL,        1 << 1,     False,       0 },
@@ -31,7 +30,8 @@ static const Rule rules[] = {
 	{ "Lutris",         	 NULL,       NULL,        1 << 3,     False,       0 },	
 	{ "League of Legends", 	 NULL,       NULL,        1 << 3,     True,        0 },	
 	{ "TeamSpeak 3",       	 NULL,       NULL,        1 << 3,     False,       0 },	
-	{ "keepassxc",           NULL,       NULL,        1 << 7,     False,       0 },
+	{ "discord",           	 NULL,       NULL,        1 << 4,     False,       0 },	
+    { "keepassxc",           NULL,       NULL,        1 << 7,     False,       0 },
 	{ "obs",         		 NULL,       NULL,        1 << 8,     False,       0 },
 };
 
@@ -57,7 +57,12 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "st","-ce", "/bin/zsh" , NULL };
-static const char *print_screen_cmd[] = { "scrot", "%Y-%m-%d-%H%M%S.png", "-e", "mv $f ~/Screenshots", NULL };
+/*static const char *print_screen_cmd[] = { "scrot", "%Y-%m-%d-%H%M%S.png", "-e", "mv $f ~/Screenshots", NULL };*/
+/*static const char *print_screen_cmd[] = { "gnome-screenshot", "-f", "/home/yorune/Screenshots/`date +%Y%m%d-%H.%M.%S.png`", NULL };
+static const char *print_screen_cmd_area[] = { "gnome-screenshot", "--area", "-f", "/home/yorune/Screenshots/`date +%Y%m%d-%H.%M.%S.png`", NULL };
+*/
+static const char *print_screen_cmd[] = { "screenshot", NULL };
+static const char *print_screen_cmd_area[] = { "screenshot-area", NULL };
 static const char *cmdlock[]  = { "slock", NULL };
 static const char *dwmkill[]  = { "dwm-kill", NULL };
 static const char *cmusshell[]  = { "st", "-ce", "cmus-shell",  NULL };
@@ -83,8 +88,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,      XK_F3,	       		spawn,		    SHCMD ("cmus-remote -v +5%")},	
 	{ MODKEY,		         XK_F3,	   	    	spawn,		    SHCMD ("ponymix increase 5")},
 	{ MODKEY, 		         XK_F10,		    spawn,		    {.v = screenswitcher} },
-	{0,                      XK_Print,  	    spawn,          {.v = print_screen_cmd } },
-	{ MODKEY,		         XK_l,	   		    spawn,	   	    {.v = cmdlock } },		
+    {0,                      XK_Print,  	    spawn,          {.v = print_screen_cmd } },
+    { MODKEY,                XK_Print,  	    spawn,          {.v = print_screen_cmd_area } },
+    { MODKEY,		         XK_l,	   		    spawn,	   	    {.v = cmdlock } },		
 	{ MODKEY,                XK_d,      		spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,      XK_Return, 		spawn,          {.v = termcmd } },
 	{ MODKEY,                XK_b,      		togglebar,      {0} },
@@ -118,10 +124,10 @@ static Key keys[] = {
     { 0,             		 0x1008ff17,       	spawn,          {.v = cmusnext }},
     { 0,             	     0x1008ff16,        spawn,          {.v = cmusprev }},
     /*{ MODKEY,                       XK_t,     		setlayout,      {.v = &layouts[0]} },*/
-	/*{ MODKEY|ShiftMask,             XK_f,      		setlayout,      {.v = &layouts[1]} },*/
 	/*{ MODKEY,                       XK_f,      		setlayout,      {.v = &layouts[2]} },*/ 
 	/* { MODKEY|ShiftMask,             XK_q,      		spawn,          {.v = dwmkill } }, */ 
 	/*{ MODKEY,                       XK_space,  		setlayout,      {0} },*/
+	/*{ MODKEY|ShiftMask,      XK_f,      		setlayout,      {.v = &layouts[1]} },*/
     TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
