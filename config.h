@@ -1,4 +1,4 @@
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -7,7 +7,7 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     	/* 0 means no systray */
-static const char *fonts[]          = { "mono:size=15" /*"Font Awesome 5 Free Solid:size=15"*/};
+static const char *fonts[]          = { "mono:size=15", "Font Awesome 5 Free Solid:size=15"};
 static const char dmenufont[]       = "mono:size=15";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -31,8 +31,9 @@ static const Rule rules[] = {
 	{ "League of Legends", 	 NULL,       NULL,        1 << 3,     True,        0 },	
 	{ "TeamSpeak 3",       	 NULL,       NULL,        1 << 3,     False,       0 },	
 	{ "discord",           	 NULL,       NULL,        1 << 4,     False,       0 },	
-    { "keepassxc",           NULL,       NULL,        1 << 7,     False,       0 },
-	{ "obs",         		 NULL,       NULL,        1 << 8,     False,       0 },
+    { "KeePassXC",           NULL,       NULL,        1 << 7,     False,       0 },
+	{ "TeamViewer",    		 NULL,       NULL,        1 << 8,     False,       0 },
+    { "obs",         		 NULL,       NULL,        1 << 8,     False,       0 },
 };
 
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */

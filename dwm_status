@@ -9,11 +9,13 @@ nm-applet --sm-disable&
 /usr/local/bin/st -e /bin/sh -c "tmux new-session -s BASE -n HOME '/bin/zsh'\; new-window -n HTOP 'htop'\; new-window -n MUSIC 'cmus'"&
 firefox&
 thunderbird&
-"/mnt/mega/Systems/Linux/apps/KeePass.AppImage"&
+keepassxc&
+#"/mnt/mega/Systems/Linux/apps/KeePass.AppImage"&
 megasync&
 dunst -config&
 /usr/bin/ibus-daemon -d&
 transmission-daemon&
+teamviewer&
 #pl&
 #(sleep 30 && getforecast)&
 
@@ -52,7 +54,7 @@ printf "%s%%\\n" " $vol"
 
 print_wifi() 
 {	
-[ "$(cat /sys/class/net/w*/operstate)" = 'down' ] && wifiicon="📡"
+[ "$(cat /sys/class/net/w*/operstate)" = 'down' ] && wifiicon=""
 
 [ ! -n "${wifiicon+var}" ] && wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')
 
