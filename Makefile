@@ -51,6 +51,11 @@ install: all
 	@sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	@chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
 
+config:
+	@mkdir -p ${HOME}/.config/dunst
+	@cp -rv dunstrc ${HOME}/.config/dunst/dunstrc
+	@cp -rv Xinitrc ${HOME}/.xinitrc
+
 uninstall:
 	@echo removing executable file from ${DESTDIR}${PREFIX}/bin
 	@rm -f ${DESTDIR}${PREFIX}/bin/dwm

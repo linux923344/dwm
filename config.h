@@ -1,3 +1,4 @@
+/* Last Update: 25-01-2020 */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -23,8 +24,8 @@ static const char *colors[][3]      = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-	{ "Opera",	         	 NULL,       NULL,        1 << 1,     False,       0 },
-	{ "firefox",  			 NULL,       NULL,        1 << 1,     False,       0 },
+    { "Vivaldi",             NULL,       NULL,        1 << 1,     False,       0 },
+    { "Firefox",  			 NULL,       NULL,        1 << 1,     False,       0 },
 	{ "Thunderbird",         NULL,       NULL,        1 << 2,     False,       0 },
 	{ "Steam",         		 NULL,       NULL,        1 << 3,     False,       0 },
 	{ "Lutris",         	 NULL,       NULL,        1 << 3,     False,       0 },	
@@ -58,23 +59,19 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "st","-ce", "/bin/zsh" , NULL };
-/*static const char *print_screen_cmd[] = { "scrot", "%Y-%m-%d-%H%M%S.png", "-e", "mv $f ~/Screenshots", NULL };*/
-/*static const char *print_screen_cmd[] = { "gnome-screenshot", "-f", "/home/yorune/Screenshots/`date +%Y%m%d-%H.%M.%S.png`", NULL };
-static const char *print_screen_cmd_area[] = { "gnome-screenshot", "--area", "-f", "/home/yorune/Screenshots/`date +%Y%m%d-%H.%M.%S.png`", NULL };
-*/
 static const char *print_screen_cmd[] = { "screenshot", NULL };
 static const char *print_screen_cmd_area[] = { "screenshot-area", NULL };
 static const char *cmdlock[]  = { "slock", NULL };
 static const char *dwmkill[]  = { "dwm-kill", NULL };
 static const char *cmusshell[]  = { "st", "-ce", "cmus-shell",  NULL };
 static const char *ranger[]  = { "st", "-ce", "ranger",  NULL };
+static const char *mixer[]  = { "st", "-ce", "pulsemixer",  NULL };
 static const char *dmenumount[]  = { "dmenumount", NULL };
 static const char *dmenuumount[]  = { "dmenuumount", NULL };
 static const char *cmusplay[]  = { "cmus-remote", "-u", NULL };
 static const char *cmusnext[]  = { "cmus-remote", "-n", NULL };
 static const char *cmusprev[]  = { "cmus-remote", "-r", NULL };
 static const char *shutdownpress[] = {"shut-sup-rest", "NULL" };
-static const char *pavucontrol[] = {"pavucontrol", "NULL" };
 static const char *screenswitcher[] = { "screen-switcher", "NULL" }; 
 
 static Key keys[] = {
@@ -98,7 +95,7 @@ static Key keys[] = {
 	{ MODKEY,                XK_Left,      		focusstack,     {.i = +1 } },
 	{ MODKEY,                XK_Right,      	focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,      XK_e,              spawn,          {.v = shutdownpress } },
-	{ MODKEY,                XK_o,              spawn,          {.v = pavucontrol } },
+	{ MODKEY,                XK_o,              spawn,          {.v = mixer } },
 	{ MODKEY|ShiftMask,      XK_Left,      		setmfact,       {.f = -0.05} },
 	{ MODKEY|ShiftMask,      XK_Right,      	setmfact,       {.f = +0.05} },
     { MODKEY,                XK_Return, 		zoom,           {0} },
