@@ -13,7 +13,7 @@ feh --bg-fill $HOME/.wall.jpg &
 redshift -l 52.2327:18.3036 -t 6500:3200&
 nm-applet --sm-disable&
 /usr/local/bin/st -e /bin/sh -c "tmux new-session -s BASE -n HOME '/bin/zsh'\; split-window -h \; split-window 'htop'\; new-window -n IRC 'irssi'\; new-window -n MUSIC 'cmus'"&
-firefox-bin&
+firefox&
 thunderbird-bin&
 sudo keepassxc&
 #megasync&
