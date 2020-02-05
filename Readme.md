@@ -16,17 +16,16 @@
 ```
 
 # Screenshot:
-![alt text](https://github.com/linux923344/dwm/raw/master/Screenshot.png) 
+![alt text](https://github.com/y0rune/dwm/raw/master/screen.png) 
 
 # Starting:
 All my started apps and bar is in the file ```dwm_status``` 
 Only I added link to the ```~/.dwm``` like that:
 
 ```bash
-┌─[yorune@Arch-I320] - [~/.dwm] - [Sat Sep 21, 23:19]
-└─[$]> ls -l
-lrwxrwxrwx 1 yorune yorune 47 May 18 18:34 autostart.sh -> /home/yorune/MEGA/Systems/Gentoo/dwm/dwm_status
-
+[22:54:51 yorune@Gentoo ~/.dwm  ]$ ls -l
+total 0
+lrwxrwxrwx 1 yorune yorune 38 Dec 17 07:33 autostart.sh -> /mnt/mega/Systems/Linux/dwm/dwm_status
 ```
 
 # Patches included:
@@ -39,4 +38,4 @@ lrwxrwxrwx 1 yorune yorune 47 May 18 18:34 autostart.sh -> /home/yorune/MEGA/Sys
 * dwm-fullscreen-6.2.diff
 
 <!-- # Wallpaper 
-![alt text](https://github.com/linux923344/dwm/raw/master/Wallpaper.jpg) -->
+![alt text](https://github.com/y0rune/dwm/raw/master/Wallpaper.jpg) -->
