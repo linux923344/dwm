@@ -12,8 +12,10 @@ compton&
 feh --bg-fill $HOME/.wall.jpg &
 redshift -l 52.2327:18.3036 -t 6500:3200&
 nm-applet --sm-disable&
-/usr/local/bin/st -e /bin/sh -c "tmux new-session -s BASE -n HOME '/bin/zsh'\; split-window -h \; split-window 'htop'\; new-window -n IRC 'irssi'\; new-window -n MUSIC 'cmus'"&
-firefox&
+#/usr/local/bin/st -e /bin/sh -c "tmux new-session -s BASE -n HOME '/bin/zsh'\; split-window -h \; split-window 'htop'\; new-window -n IRC 'irssi'\; new-window -n MUSIC 'cmus'"&
+/usr/local/bin/st -e /bin/sh -c "tmux new-session -s BASE -n HOME '/bin/zsh'\; split-window -h \; split-window 'htop'\; new-window -n MUSIC 'cmus'"&
+#firefox&
+export QT_SCALE_FACTOR=1; qutebrowser&
 thunderbird-bin&
 sudo keepassxc&
 #megasync&
@@ -45,10 +47,9 @@ print_torrent(){
 }
 
 testweather() { 
-[ "$(stat -c %y "/home/yorune/.weatherreport" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] && curl -s "wttr.in/$location" > "/home/yorune/.weatherreport" && notify-send " Weather" "New weather forecast for today."
+[ "$(stat -c %y "/home/yorune/.weatherreport" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] && curl -s "wttr.in/$location" > "/home/yorune/.weatherreport" 
 
 printf "%s " "$(sed '16q;d' "/home/yorune/.weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/ /g" | tr -d '\n')" &&  sed '13q;d' "/home/yorune/.weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ",$1 "°","",$2 "°"}'
-
 }
 
 
@@ -75,6 +76,7 @@ print_temp(){
 print_date(){
 	echo -e " $(date +"%d/%m %H:%M")"
 }
+
 print_mail(){
 	RESULT=$(echo "$(du -a ~/.mailbox/*/inbox/new/* 2>/dev/null | sed -n '$=')$(cat /tmp/imapsyncicon_$USER 2>/dev/null)")
 	if [ -z $RESULT ]; then

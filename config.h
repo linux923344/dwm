@@ -24,7 +24,7 @@ static const char *colors[][3]      = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-    { "Vivaldi",             NULL,       NULL,        1 << 1,     False,       0 },
+    { "qutebrowser",             NULL,       NULL,        1 << 1,     False,       0 },
     { "Firefox",  			 NULL,       NULL,        1 << 1,     False,       0 },
 	{ "Thunderbird",         NULL,       NULL,        1 << 2,     False,       0 },
 	{ "Steam",         		 NULL,       NULL,        1 << 3,     False,       0 },
