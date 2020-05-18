@@ -7,8 +7,8 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     	/* 0 means no systray */
-static const char *fonts[]          = { "mono:size=15", "Font Awesome 5 Free Solid:size=15"};
-static const char dmenufont[]       = "mono:size=15";
+static const char *fonts[]          = { "mono:size=13","JoyPixels:size=13"};
+static char dmenufont[]             = "mono:size=13";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -23,18 +23,19 @@ static const char *colors[][3]      = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-    { "Gimp",                NULL,       NULL,        0,          True,       -1 },
-    { "pulsemixer",          NULL,       NULL,        0,          True,       -1 },
-    { "Google-chrome",         NULL,       NULL,        1 << 1,     False,       0 },
+    { "Gkrellm",             NULL,       NULL,        1 << 0,     True,        0 },
+    { "Gimp",                NULL,       NULL,        0,          True,        0 },
+    { NULL,                  NULL, "pulsemixer",      0,          True,        0 },
+    { "Google-chrome",       NULL,       NULL,        1 << 1,     False,       0 },
     { "Firefox",  			 NULL,       NULL,        1 << 1,     False,       0 },
 	{ "Thunderbird",         NULL,       NULL,        1 << 2,     False,       0 },
 	{ "Steam",         		 NULL,       NULL,        1 << 3,     False,       0 },
-	{ "Lutris",         	 NULL,       NULL,        1 << 3,     False,       0 },
+    { "Lutris",         	 NULL,       NULL,        1 << 3,     False,       0 },
 	{ "League of Legends", 	 NULL,       NULL,        1 << 3,     True,        0 },
 	{ "TeamSpeak 3",       	 NULL,       NULL,        1 << 3,     False,       0 },
 	{ "discord",           	 NULL,       NULL,        1 << 4,     False,       0 },
-    { "KeePassXC",           NULL,       NULL,        1 << 7,     False,       0 },
-	{ "TeamViewer",    		 NULL,       NULL,        1 << 8,     False,       0 },
+    /*{ "KeePassXC",           NULL,       NULL,        1 << 7,     False,       0 },*/
+    { "TeamViewer",    		 NULL,       NULL,        1 << 8,     False,       0 },
     { "obs",         		 NULL,       NULL,        1 << 8,     False,       0 },
 };
 
