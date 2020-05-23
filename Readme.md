@@ -16,7 +16,7 @@
 ```
 
 # Screenshot:
-![alt text](https://github.com/y0rune/dwm/raw/master/screen.png) 
+![alt text](https://yorune.pl/u/NDZlOGY5NzIwNjRjZWI4.png) 
 
 # Patches included:
 
