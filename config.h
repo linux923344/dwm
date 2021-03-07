@@ -28,12 +28,13 @@ static const Rule rules[] = {
     { NULL,                  NULL, "pulsemixer",      0,          True,        0 },
     { "mpv",                 NULL,       NULL,        0,          True,        0 },
     { "MuPDF",               NULL,       NULL,        0,          True,        0 },
-    { "Brave",               NULL,       NULL,        1 << 1,     False,       0 },
     { "Firefox",  			 NULL,       NULL,        1 << 1,     False,       0 },
     { "FreeRDP",  			 NULL,       NULL,        1 << 2,     False,       0 },
+    { "Emacs",               NULL,       NULL,        1 << 2,     False,       0 },
+    { "discord",             NULL,       NULL,        1 << 3,     False,       0 },
     { "Teams",               NULL,       NULL,        1 << 4,     False,       0 },
-    { "Spicy",  			 NULL,       NULL,        1 << 2,     False,       0 },
-
+    { "xfreerdp",            NULL,       NULL,        1 << 7,     False,       0 },
+    { NULL,                  NULL,       "KeePass",   1 << 8,     False,       0 },
 };
 
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
@@ -95,8 +96,9 @@ static Key keys[] = {
 	{ MODKEY,                XK_b,      		togglebar,      {0} },
 	{ MODKEY,                XK_Left,      		focusstack,     {.i = +1 } },
 	{ MODKEY,                XK_Right,      	focusstack,     {.i = -1 } },
-	{ MODKEY|ShiftMask,      XK_e,              spawn,          {.v = shutdownpress } },
-	{ MODKEY,                XK_o,              spawn,          {.v = mixer } },
+	{ MODKEY,                XK_e,              spawn,          SHCMD ("emacs")},
+    { MODKEY|ShiftMask,      XK_e,              spawn,          {.v = shutdownpress } },
+    { MODKEY,                XK_o,              spawn,          {.v = mixer } },
 	{ MODKEY|ShiftMask,      XK_Left,      		setmfact,       {.f = -0.05} },
 	{ MODKEY|ShiftMask,      XK_Right,      	setmfact,       {.f = +0.05} },
     { MODKEY,                XK_Return, 		zoom,           {0} },
