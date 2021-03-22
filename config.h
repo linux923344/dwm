@@ -7,8 +7,8 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     	/* 0 means no systray */
-static const char *fonts[]          = { "mono:size=11","JoyPixels:size=11"};
-static char dmenufont[]             = "mono:size=11";
+static const char *fonts[]          = { "mono:size=12","JoyPixels:size=12"};
+static char dmenufont[]             = "mono:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -73,18 +73,21 @@ static const char *cmusnext[]  = { "cmus-remote", "-n", NULL };
 static const char *cmusprev[]  = { "cmus-remote", "-r", NULL };
 static const char *shutdownpress[] = {"shut-sup-rest", "NULL" };
 static const char *screenswitcher[] = { "screen-switcher", "NULL" };
+static const char *volumeup[]= {"volume", "up", "NULL"};
+static const char *volumedown[]= {"volume", "down", "NULL"};
+static const char *volumetoggle[]= {"volume", "toggle", "NULL"};
 
 static Key keys[] = {
 	{0,				         0x1008ff02,		spawn, 	        SHCMD ("sudo light -A 10")},
 	{0, 			         0x1008ff03, 		spawn,	        SHCMD ("sudo light -U 10")},
-	{0, 			         0x1008ff11, 		spawn, 		    SHCMD ("ponymix decrease 5")},
-    {0,				         0x1008ff12, 		spawn,		    SHCMD ("ponymix toggle")},
-	{0, 			         0x1008ff13, 		spawn,		    SHCMD ("ponymix increase 5")},
-	{ MODKEY,		         XK_F2,	   	    	spawn, 		    SHCMD ("ponymix decrease 5")},
-    { MODKEY,		         XK_F1,	   	    	spawn,		    SHCMD ("ponymix toggle")},
+	{0, 			         0x1008ff11, 		spawn, 		    {.v = volumedown} },
+    {0,				         0x1008ff12, 		spawn,		    {.v = volumetoggle} },
+	{0, 			         0x1008ff13, 		spawn,		    {.v = volumeup} },
+	{ MODKEY,		         XK_F2,	   	    	spawn, 		    {.v = volumedown} },
+    { MODKEY,		         XK_F1,	   	    	spawn,		    {.v = volumetoggle} },
 	{ MODKEY|ShiftMask,	     XK_F2,  	   		spawn,		    SHCMD ("cmus-remote -v -5%")},
 	{ MODKEY|ShiftMask,      XK_F3,	       		spawn,		    SHCMD ("cmus-remote -v +5%")},
-	{ MODKEY,		         XK_F3,	   	    	spawn,		    SHCMD ("ponymix increase 5")},
+	{ MODKEY,		         XK_F3,	   	    	spawn,		    {.v = volumedown} },
 	{ MODKEY, 		         XK_F10,		    spawn,		    {.v = screenswitcher} },
 	{ MODKEY, 		         XK_F11,		    spawn,		    SHCMD ("sudo light -U 10")},
 	{ MODKEY, 		         XK_F12,		    spawn,		    SHCMD ("sudo light -A 10")},
