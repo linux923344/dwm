@@ -68,14 +68,18 @@ static const char *ranger[]  = { "st", "-ce", "ranger",  NULL };
 static const char *mixer[]  = { "st", "-ce", "pulsemixer",  NULL };
 static const char *dmenumount[]  = { "dmenumount", NULL };
 static const char *dmenuumount[]  = { "dmenuumount", NULL };
-static const char *cmusplay[]  = { "cmus-remote", "-u", NULL };
-static const char *cmusnext[]  = { "cmus-remote", "-n", NULL };
-static const char *cmusprev[]  = { "cmus-remote", "-r", NULL };
+static const char *cmusplay[]  = { "cmus-control", "play", NULL };
+static const char *cmusnext[]  = { "cmus-control", "next", NULL };
+static const char *cmusprev[]  = { "cmus-control", "prev", NULL };
 static const char *shutdownpress[] = {"shut-sup-rest", "NULL" };
 static const char *screenswitcher[] = { "screen-switcher", "NULL" };
 static const char *volumeup[]= {"volume", "up", "NULL"};
 static const char *volumedown[]= {"volume", "down", "NULL"};
 static const char *volumetoggle[]= {"volume", "toggle", "NULL"};
+
+/* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
+static char *statuscmds[] = { "notify-send Mouse$BUTTON" };
+static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 
 static Key keys[] = {
 	{0,				         0x1008ff02,		spawn, 	        SHCMD ("sudo light -A 10")},
@@ -150,7 +154,9 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button1,        spawn,          {.v = statuscmd } },
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = statuscmd } },
+	{ ClkStatusText,        0,              Button3,        spawn,          {.v = statuscmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

@@ -2,7 +2,6 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -32,13 +31,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Chromium",       NULL,       NULL,        1 << 1,     False,       -1 },	
-	{ "Opera",       NULL,       NULL,        1 << 1,     False,       -1 },
-	{ NULL,             NULL,   "Audacious",     1 << 4,     False,       -1 },	
-	{ "Thunar",         NULL,       NULL,        1 << 5,     False,       -1 },
-	{ "Thunderbird",    NULL,       NULL,        1 << 3,     False,       -1 },
-	{ "Pidgin",    NULL,       NULL,        1 << 2,     False,       -1 },
-	{ "qbittorent",         NULL,       NULL,        1 << 5,     False,       -1 },
+	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -67,18 +61,10 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "xterm", NULL };
-static const char *print_screen_cmd[] = { "scrot", "%Y-%m-%d-%H%M%S.png", "-e", "mv $f ~/images/screenshots", NULL };
-static const char *cmdlock[]  = { "slock", NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{0                    , 0x1008ff02 ,	spawn,	 	SHCMD ("xbacklight -inc 10")},
-	{0                    , 0x1008ff03 , 	spawn,	        SHCMD ("xbacklight -dec 10")},
-	{0 		      , 0x1008ff11 , 	spawn, 		SHCMD ("pactl set-sink-volume 0 -5%")},
-        {0                    , 0x1008ff12 , 	spawn, 		SHCMD ("pactl set-sink-mute 0 toggle")},
-        {0                    , 0x1008ff13 , 	spawn, 		SHCMD ("pactl set-sink-volume 0 +5%")},
-	{ MODKEY|ShiftMask,		XK_l,	   spawn,	   {.v = cmdlock } },		
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -102,9 +88,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
-	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
