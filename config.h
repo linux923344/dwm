@@ -26,6 +26,7 @@ static const Rule rules[] = {
     { "Gkrellm",             NULL,       NULL,        1 << 0,     True,        0 },
     { "Gimp",                NULL,       NULL,        0,          True,        0 },
     { NULL,                  NULL, "pulsemixer",      0,          True,        0 },
+    { NULL,                  NULL,   "newsboat",      0,          True,        0 },
     { "mpv",                 NULL,       NULL,        0,          True,        0 },
     { "MuPDF",               NULL,       NULL,        0,          True,        0 },
     { "Firefox",  			 NULL,       NULL,        1 << 1,     False,       0 },
@@ -58,6 +59,7 @@ static const Layout layouts[] = {
 
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", NULL };
+static const char *dmenucmdroot[] = { "sudo", "dmenu_run", NULL };
 static const char *termcmd[]  = { "st","-ce", "/bin/zsh" , NULL };
 static const char *print_screen_cmd[] = { "screenshot", NULL };
 static const char *print_screen_cmd_area[] = { "screenshot-area", NULL };
@@ -66,6 +68,7 @@ static const char *dwmkill[]  = { "dwm-kill", NULL };
 static const char *cmusshell[]  = { "st", "-ce", "cmus-shell",  NULL };
 static const char *ranger[]  = { "st", "-ce", "ranger",  NULL };
 static const char *mixer[]  = { "st", "-ce", "pulsemixer",  NULL };
+static const char *newsboat[]  = { "st", "-ce", "newsboat",  NULL };
 static const char *dmenumount[]  = { "dmenumount", NULL };
 static const char *dmenuumount[]  = { "dmenuumount", NULL };
 static const char *cmusplay[]  = { "cmus-control", "play", NULL };
@@ -99,6 +102,7 @@ static Key keys[] = {
     { MODKEY,                XK_Print,  	    spawn,          {.v = print_screen_cmd_area } },
     { MODKEY,		         XK_l,	   		    spawn,	   	    {.v = cmdlock } },
 	{ MODKEY,                XK_d,      		spawn,          {.v = dmenucmd } },
+    { MODKEY|ShiftMask,      XK_d,              spawn,          {.v = dmenucmdroot } },
 	{ MODKEY|ShiftMask,      XK_Return, 		spawn,          {.v = termcmd } },
 	{ MODKEY,                XK_b,      		togglebar,      {0} },
 	{ MODKEY,                XK_Left,      		focusstack,     {.i = +1 } },
@@ -122,7 +126,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,      XK_period, 		tagmon,         {.i = +1 } },
 	{ MODKEY,			     XK_k,		        spawn, 		    SHCMD ("qalculate-gtk")},
 	{ MODKEY,                XK_r,              spawn,          {.v = ranger }},
-	{ MODKEY,             	 XK_m,              spawn,          {.v = cmusshell }},
+    { MODKEY,             	 XK_n,              spawn,          {.v = newsboat }},
+    { MODKEY,             	 XK_m,              spawn,          {.v = cmusshell }},
 	{ MODKEY,             	 XK_F4,             spawn,          {.v = dmenumount }},
     { MODKEY,                XK_F5,             spawn,          {.v = dmenuumount }},
 	{ MODKEY|ShiftMask,      XK_apostrophe,     spawn,          {.v = cmusplay }},
